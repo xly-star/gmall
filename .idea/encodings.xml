@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/fastdfs-client-java/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/fastdfs-client-java/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gmall-bean/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gmall-cart-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gmall-cart-web/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gmall-common-util/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gmall-interface/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gmall-item-web/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gmall-list-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gmall-list-web/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gmall-manage-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gmall-manage-web/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gmall-order-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gmall-order-web/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gmall-parent/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gmall-parent/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gmall-passport-web/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gmall-payment/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gmall-service-util/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gmall-user-manage/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gmall-web-util/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gware-manage/src/main/java" charset="UTF-8" />
+  </component>
+</project>
