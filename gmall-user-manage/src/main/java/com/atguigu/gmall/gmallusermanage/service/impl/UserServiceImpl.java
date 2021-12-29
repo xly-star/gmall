@@ -18,7 +18,6 @@ import java.util.List;
 
 /**
  * @author xulingyun
- * @create 2020-09-28 22:14
  */
 @Service
 public class UserServiceImpl implements UserService {
@@ -31,13 +30,20 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private RedisUtil redisUtil;
 
-    public String userKey_prefix="user:";
-    public String userinfoKey_suffix=":info";
-    public int userKey_timeOut=60*60*24;
+    public String userKey_prefix = "user:";
+    public String userinfoKey_suffix = ":info";
+    public int userKey_timeOut = 60 * 60 * 24;
 
     @Override
     public List<UserInfo> getAllUserInfo() {
         return userMapper.selectAll();
+    }
+
+    @Override
+    public UserInfo getUserNameByUserId(String userId) {
+        UserInfo userInfo = new UserInfo();
+        userInfo.setId(userId);
+        return userMapper.selectOne(userInfo);
     }
 
     @Override
@@ -53,10 +59,10 @@ public class UserServiceImpl implements UserService {
         userInfo.setPasswd(digestAsHex);
         UserInfo info = userMapper.selectOne(userInfo);
 
-        if (info != null){
+        if (info != null) {
             String key = userKey_prefix + info.getId() + userinfoKey_suffix;
             Jedis jedis = redisUtil.getJedis();
-            jedis.setex(key,userKey_timeOut, JSON.toJSONString(info));
+            jedis.setex(key, userKey_timeOut, JSON.toJSONString(info));
             jedis.close();
         }
         return info;
@@ -67,10 +73,10 @@ public class UserServiceImpl implements UserService {
         Jedis jedis = null;
         try {
             jedis = redisUtil.getJedis();
-            String key = userKey_prefix + userId+ userinfoKey_suffix;
+            String key = userKey_prefix + userId + userinfoKey_suffix;
             String userJson = jedis.get(key);
             // 延长时效
-            jedis.expire(key,userKey_timeOut);
+            jedis.expire(key, userKey_timeOut);
             if (userJson != null) {
                 UserInfo userInfo = JSON.parseObject(userJson, UserInfo.class);
                 return userInfo;
@@ -78,10 +84,27 @@ public class UserServiceImpl implements UserService {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (jedis != null){
+            if (jedis != null) {
                 jedis.close();
             }
         }
         return null;
+    }
+
+    @Override
+    public String regist(UserInfo userInfo) {
+        String digestAsHex = DigestUtils.md5DigestAsHex(userInfo.getPasswd().getBytes());
+        userInfo.setPasswd(digestAsHex);
+        userInfo.setName(userInfo.getLoginName());
+        userInfo.setNickName(userInfo.getLoginName());
+        userInfo.setEmail(userInfo.getLoginName()+"qq.com");
+        return String.valueOf(userMapper.insert(userInfo));
+    }
+
+    @Override
+    public UserInfo getUserInfoByUserName(String userName) {
+        UserInfo userInfo = new UserInfo();
+        userInfo.setLoginName(userName);
+        return userMapper.selectOne(userInfo);
     }
 }

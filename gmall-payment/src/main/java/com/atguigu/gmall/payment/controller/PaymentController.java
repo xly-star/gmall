@@ -41,6 +41,12 @@ public class PaymentController {
     @Autowired
     private AlipayClient alipayClient;
 
+    @RequestMapping("main")
+    @ResponseBody
+    public String main(){
+        return "nihao";
+    }
+
     @RequestMapping("index")
     @LoginRequire
     public String index(HttpServletRequest request) {
@@ -136,7 +142,7 @@ public class PaymentController {
                 paymentInfoUpd.setCallbackContent(paramMap.toString());
                 paymentService.updatePaymentInfo(out_trade_no, paymentInfoUpd);
                 //支付成功回调成功发送消息给订单模块修改状态
-                sendPaymentResult(paymentInfo,"success");
+                sendPaymentResult(paymentInfoHas,"success");
                 return "success";
             }
         }

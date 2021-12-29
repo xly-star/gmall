@@ -8,7 +8,6 @@ import java.util.List;
 
 /**
  * @author xulingyun
- * @create 2020-10-08 18:37
  */
 @Data
 public class SkuLsInfo implements Serializable {

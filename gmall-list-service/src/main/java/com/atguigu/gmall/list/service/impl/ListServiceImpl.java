@@ -29,7 +29,7 @@ import java.util.Map;
 
 /**
  * @author xulingyun
- * @create 2020-10-08 18:40
+ * @create 2021-5-08 18:40
  */
 @Service
 public class ListServiceImpl implements ListService {
@@ -60,7 +60,8 @@ public class ListServiceImpl implements ListService {
         SkuLsResult skuLsResult = null;
         try {
             String query = makeQueryStringForSearch(skuLsParams);
-            Search search = new Search.Builder(query).addIndex("gmall").addType("SkuInfo").build();
+            Search search = new Search.Builder(query).addIndex("gmall")
+                    .addType("SkuInfo").build();
             SearchResult result = jestClient.execute(search);
             skuLsResult = makeResultForSearch(result, skuLsParams);
         } catch (IOException e) {

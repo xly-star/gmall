@@ -8,7 +8,6 @@ import java.io.Serializable;
 
 /**
  * @author xulingyun
- * @create 2020-09-29 20:14
  */
 @Data
 public class UserAddress implements Serializable {

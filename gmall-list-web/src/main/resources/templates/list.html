@@ -17,18 +17,28 @@
     <div class="header_head_box">
         <b class="header_head_p">
             <div style="overflow: hidden">
-                <a href="#" class="header_head_p_a1">
+                <a href="http://www.gmall.com/index" >
                     首页
                 </a>
             </div>
 
         </b>
         <ul>
-            <li>
-                <a href="#" class="li_2">
-                    <span th:if="${nickName}" th:text="${nickName}">你好，请登录</span>
+            <li style="border: 0;">
+                <span th:if="${nickName}" th:text="${nickName}">你好，请登录</span>
+                <a href="http://passport.atguigu.com/index.html" class="aa">
                     <span th:if="!${nickName}">你好，请登录</span>
-                </a>
+                </a></li>
+            <li>
+                <a th:if="!${nickName}" href="http://passport.atguigu.com/regist" style="color: red;">免费注册</a>
+            </li>
+
+            <li>
+                <a th:if="${nickName}" href="http://manage.gmall.com/logout" style="color: red;">退出</a>
+            </li>
+            <span>|</span>
+            <li>
+                <a href="http://order.gmall.com/toOrder">我的订单</a>
             </li>
 
         </ul>
@@ -46,7 +56,7 @@
     </div>
     <div class="header_ico">
         <div class="header_gw">
-            <span><a href="#">我的购物车</a></span>
+            <span><a href="#" onclick="toCartList()">我的购物车</a></span>
             <img src="/image/settleup-@1x.png" />
             <span>0</span>
         </div>
@@ -323,6 +333,9 @@
         window.location.href="/list.html?keyword="+keyword;
     }
 
+    function toCartList(){
+        window.location.href="http://cart.gmall.com/cartList";
+    }
 
 
     $(".sl_ext a:nth-child(1)").hover(function(){

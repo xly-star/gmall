@@ -6,7 +6,6 @@ import java.util.List;
 
 /**
  * @author xulingyun
- * @create 2020-10-01 8:30
  */
 public interface ManageService {
 
@@ -101,7 +100,7 @@ public interface ManageService {
      * 保存skuInfo
      * @param skuInfo
      */
-    void saveSkuInfo(SkuInfo skuInfo);
+    String saveSkuInfo(SkuInfo skuInfo);
 
     /**
      * 根据skuId查询SkuInfo

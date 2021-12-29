@@ -1,5 +1,6 @@
 package com.atguigu.gmall.service;
 
+import com.atguigu.gmall.bean.OrderDetail;
 import com.atguigu.gmall.bean.OrderInfo;
 import com.atguigu.gmall.bean.enums.ProcessStatus;
 
@@ -8,7 +9,6 @@ import java.util.Map;
 
 /**
  * @author xulingyun
- * @create 2020-10-16 10:50
  */
 public interface OrderService {
 
@@ -95,4 +95,7 @@ public interface OrderService {
      * @return
      */
     List<OrderInfo> splitOrder(String orderId, String wareSkuMap);
+
+
+    List<OrderInfo> getOrderListByUserId(String userId);
 }

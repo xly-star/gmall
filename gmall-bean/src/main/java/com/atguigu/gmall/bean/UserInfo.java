@@ -7,7 +7,6 @@ import java.io.Serializable;
 
 /**
  * @author xulingyun
- * @create 2020-09-28 20:12
  */
 @Data
 @Table(name = "user_info")

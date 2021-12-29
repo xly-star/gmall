@@ -12,10 +12,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * @author xulingyun
- * @create 2020-10-09 7:54
- */
 @Controller
 public class ListController {
     @Reference

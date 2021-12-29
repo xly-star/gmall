@@ -7,7 +7,6 @@ import java.util.List;
 
 /**
  * @author xulingyun
- * @create 2020-09-28 20:15
  */
 public interface UserService {
     /**
@@ -15,6 +14,8 @@ public interface UserService {
      * @return返回所有用户信息
      */
      List<UserInfo> getAllUserInfo();
+
+     UserInfo getUserNameByUserId(String userId);
 
     /**
      *
@@ -37,4 +38,13 @@ public interface UserService {
      * @return
      */
     UserInfo verify(String userId);
+
+    /**
+     * 注册用户
+     * @param userInfo
+     * @return
+     */
+    String regist(UserInfo userInfo);
+
+    UserInfo getUserInfoByUserName(String userName);
 }

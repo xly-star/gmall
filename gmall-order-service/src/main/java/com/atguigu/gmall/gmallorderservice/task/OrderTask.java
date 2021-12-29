@@ -13,8 +13,8 @@ import java.util.List;
  * @author xulingyun
  * @create 2020-10-20 18:25
  */
-@Component
-@EnableScheduling
+//@Component
+//@EnableScheduling
 public class OrderTask {
 
     @Reference

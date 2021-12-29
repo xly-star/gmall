@@ -3,6 +3,7 @@ package com.atguigu.gmall.gmallcartservice.service.impl;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.atguigu.gmall.bean.CartInfo;
 import com.atguigu.gmall.bean.OrderDetail;
 import com.atguigu.gmall.bean.SkuInfo;
@@ -11,6 +12,7 @@ import com.atguigu.gmall.gmallcartservice.mapper.CartInfoMapper;
 import com.atguigu.gmall.gmallcartservice.util.CartConst;
 import com.atguigu.gmall.service.CartInfoService;
 import com.atguigu.gmall.service.ManageService;
+import net.minidev.json.JSONUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import redis.clients.jedis.Jedis;
 
@@ -41,7 +43,10 @@ public class CartInfoServiceImpl implements CartInfoService {
         cartInfoSelect.setUserId(userId);
         cartInfoSelect.setSkuId(skuId);
         CartInfo cartInfo = cartInfoMapper.selectOne(cartInfoSelect);
+        System.out.println("********************"+ JSONObject.toJSONString(cartInfo));
         //查询商品信息
+        System.out.println("********************"+manageService);
+        System.out.println("********************"+skuId);
         SkuInfo skuInfo = manageService.getSkuInfo(skuId);
         if (skuId != null) {
             //当前添加的商品在购物车中已经存在数量修改，

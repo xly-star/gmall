@@ -63,6 +63,9 @@ public class OrderInfo implements Serializable {
     @Column
     private String trackingNo;
 
+    @Column
+    private String imgUrl;
+
 
     @Transient
     private List<OrderDetail> orderDetailList;

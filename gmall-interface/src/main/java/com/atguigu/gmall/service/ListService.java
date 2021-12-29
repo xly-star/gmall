@@ -6,7 +6,6 @@ import com.atguigu.gmall.bean.SkuLsResult;
 
 /**
  * @author xulingyun
- * @create 2020-10-08 18:39
  */
 public interface ListService {
     /**

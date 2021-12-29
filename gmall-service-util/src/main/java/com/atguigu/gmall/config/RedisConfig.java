@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * @author xulingyun
- * @create 2020-10-06 11:59
  */
 @Configuration//相当于.xml文件
 public class RedisConfig {

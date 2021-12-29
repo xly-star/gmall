@@ -18,17 +18,36 @@
             <ul class="header-left">
                 <li>
 
-                    <a href="">首页</a>
+                    <a href="http://www.gmall.com/index">首页</a>
                 </li>
 
             </ul>
+<!--            <ul class="header-right">-->
+<!--                <li th:if="!${nickName}"><a href="../登录页面\index.html" style="color: red;">你好，请登录</a></li>-->
+<!--                <li th:if="${nickName}" th:text="${nickName}"><a href="../登录页面\index.html" style="color: red;">你好，请登录</a></li>-->
+<!--                <li th:if="!${nickName}"><a href="../注册页面\index.html" >免费注册</a></li>-->
+<!--                <li class="spacer"></li>-->
+<!--                <li><a href="http://order.gmall.com/toOrder">我的订单</a></li>-->
+<!--                <li class="spacer"></li>-->
+
+<!--            </ul>-->
             <ul class="header-right">
-                <li th:if="!${nickName}"><a href="../登录页面\index.html" style="color: red;">你好，请登录</a></li>
-                <li th:if="${nickName}" th:text="${nickName}"><a href="../登录页面\index.html" style="color: red;">你好，请登录</a></li>
-                <li th:if="!${nickName}"><a href="../注册页面\index.html" >免费注册</a></li>
-                <li class="spacer"></li>
-                <li><a href="">我的订单</a></li>
-                <li class="spacer"></li>
+                <li style="border: 0;">
+                    <span th:if="${nickName}" th:text="${nickName}">你好，请登录</span>
+                    <a href="http://passport.atguigu.com/index.html" class="aa">
+                        <span th:if="!${nickName}">你好，请登录</span>
+                    </a></li>
+                <li>
+                    <a th:if="!${nickName}" href="http://passport.atguigu.com/regist" style="color: red;">免费注册</a>
+                </li>
+
+                <li>
+                    <a th:if="${nickName}" href="http://manage.gmall.com/logout" style="color: red;">退出</a>
+                </li>
+                <span></span>
+                <li>
+                    <a href="http://order.gmall.com/toOrder">我的订单</a>
+                </li>
 
             </ul>
             <div style="clear: both;"></div>

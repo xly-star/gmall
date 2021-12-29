@@ -6,7 +6,6 @@ import redis.clients.jedis.JedisPoolConfig;
 
 /**
  * @author xulingyun
- * @create 2020-10-06 11:52
  */
 public class RedisUtil {
     private JedisPool jedisPool;

@@ -8,7 +8,6 @@ import javax.jms.JMSException;
 
 /**
  * @author xulingyun
- * @create 2020-10-19 15:41
  */
 public class ActiveMQUtil {
     PooledConnectionFactory pooledConnectionFactory = null;

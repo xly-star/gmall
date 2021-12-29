@@ -2,6 +2,7 @@ package com.atguigu.gmall.gmallorderweb.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.atguigu.gmall.bean.*;
 import com.atguigu.gmall.bean.enums.OrderStatus;
 import com.atguigu.gmall.bean.enums.ProcessStatus;
@@ -10,6 +11,7 @@ import com.atguigu.gmall.service.CartInfoService;
 import com.atguigu.gmall.service.ManageService;
 import com.atguigu.gmall.service.OrderService;
 import com.atguigu.gmall.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +29,7 @@ import java.util.UUID;
  * @create 2020-09-28 22:26
  */
 @Controller
+@Slf4j
 public class OrderController {
 
     @Reference
@@ -76,6 +79,7 @@ public class OrderController {
     @RequestMapping("submitOrder")
     @LoginRequire
     public String submitOrder(HttpServletRequest request, OrderInfo orderInfo) {
+        System.out.println(JSONObject.toJSONString(orderInfo));
         String userId = (String) request.getAttribute("userId");
         String tradeNo = request.getParameter("tradeNo");
         //检验tradeNo
@@ -88,8 +92,8 @@ public class OrderController {
         //验证库存
         List<OrderDetail> orderDetailList = orderInfo.getOrderDetailList();
         for (OrderDetail orderDetail : orderDetailList) {
-            boolean res = orderService.checkStock(orderDetail.getSkuId(),orderDetail.getSkuNum());
-            if (!res){
+            boolean res = orderService.checkStock(orderDetail.getSkuId(), orderDetail.getSkuNum());
+            if (!res) {
                 request.setAttribute("errMsg", "库存不足!");
                 return "tradeFail";
             }
@@ -97,7 +101,7 @@ public class OrderController {
             //验证价格
             SkuInfo skuInfo = manageService.getSkuInfo(orderDetail.getSkuId());
             int result = skuInfo.getPrice().compareTo(orderDetail.getOrderPrice());
-            if (result != 0){
+            if (result != 0) {
                 request.setAttribute("errMsg", "商品价格发生变化,请重新下单!");
                 cartInfoService.loadInfoToRedis(userId);
                 //删除redis中被选中的集合，因为mysql和redis的购物车中isChecked都是0所以不会被删除
@@ -126,11 +130,11 @@ public class OrderController {
 
     @RequestMapping("orderSplit")
     @ResponseBody
-    public String orderSplit(HttpServletRequest request){
+    public String orderSplit(HttpServletRequest request) {
         String orderId = request.getParameter("orderId");
         String wareSkuMap = request.getParameter("wareSkuMap");
         //查询出子订单
-        List<OrderInfo> orderInfoList = orderService.splitOrder(orderId,wareSkuMap);
+        List<OrderInfo> orderInfoList = orderService.splitOrder(orderId, wareSkuMap);
 
         ArrayList<Map> maps = new ArrayList<>();
         for (OrderInfo orderInfo : orderInfoList) {
@@ -139,6 +143,20 @@ public class OrderController {
         }
 
         return JSON.toJSONString(maps);
+    }
+
+    @RequestMapping("toOrder")
+    @LoginRequire(autoRedirect = true)
+    public String toOrder(HttpServletRequest request) {
+        String userId = (String) request.getAttribute("userId");
+        UserInfo userName = userService.getUserNameByUserId(userId);
+        log.info("userId = {}", userId);
+        System.out.println("******用户****"+userId);
+        List<OrderInfo> orderListByUserId = orderService.getOrderListByUserId(userId);
+        request.setAttribute("orderList", orderListByUserId);
+        request.setAttribute("userInfo",userName);
+        System.out.println(JSONObject.toJSONString(orderListByUserId));
+        return "list";
     }
 
 }

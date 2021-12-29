@@ -9,13 +9,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
 
-/**
- * @author xulingyun
- * @create 2020-10-01 8:46
- */
+
 @RestController
 @CrossOrigin
 public class ManageController {
@@ -58,6 +54,10 @@ public class ManageController {
         return manageService.baseSaleAttrList();
     }
 
+    /**
+     * 上架商品也就是将商品加入es中
+     * @param skuId
+     */
     @RequestMapping("onSale")
     public void onSale(String skuId){
         SkuInfo skuInfo = manageService.getSkuInfo(skuId);

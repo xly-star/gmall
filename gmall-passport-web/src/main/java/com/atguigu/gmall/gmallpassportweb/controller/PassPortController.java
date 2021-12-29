@@ -11,13 +11,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * @author xulingyun
- * @create 2020-10-10 16:22
  */
 @Controller
 public class PassPortController {
@@ -33,6 +34,22 @@ public class PassPortController {
         String originUrl = request.getParameter("originUrl");
         request.setAttribute("originUrl", originUrl);
         return "index";
+    }
+
+    @RequestMapping("regist")
+    public String regist(){
+        return "regist";
+    }
+
+    @RequestMapping("registUser")
+    @ResponseBody
+    public String registUser(UserInfo userInfo){
+        UserInfo userInfo1 = userService.getUserInfoByUserName(userInfo.getLoginName());
+        if (userInfo1 != null){
+            return "fail";
+        }
+        userService.regist(userInfo);
+        return "success";
     }
 
     @RequestMapping("login")
@@ -51,6 +68,7 @@ public class PassPortController {
             return "fail";
         }
     }
+
 
     @RequestMapping("verify")
     @ResponseBody

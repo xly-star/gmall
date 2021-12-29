@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 
@@ -33,6 +34,7 @@ public class ItemController {
     public String getSkuInfo(@PathVariable String skuId, Model model){
         //根据skuId查询skuInfo和图片信息
         SkuInfo skuInfo = manageService.getSkuInfo(skuId);
+//        skuInfo.setPrice(skuInfo.getPrice().add(new BigDecimal(20000)));
         //根据skiInfo中的skuId和spuId查询spuSaleAttr集合
         List<SpuSaleAttr> spuSaleAttrList = manageService.getSpuSaleAttrListCheckBySku(skuInfo);
         //根据spuId查询所有sku对应的销售属性值集合，将其结果存入map

@@ -189,7 +189,7 @@ public class ManageServiceImpl implements ManageService {
 
     @Override
     @Transactional
-    public void saveSkuInfo(SkuInfo skuInfo) {
+    public String saveSkuInfo(SkuInfo skuInfo) {
         //保存SkuInfo
         skuInfoMapper.insertSelective(skuInfo);
         List<SkuImage> skuImageList = skuInfo.getSkuImageList();
@@ -218,6 +218,7 @@ public class ManageServiceImpl implements ManageService {
                 skuSaleAttrValueMapper.insertSelective(skuSaleAttrValue);
             }
         }
+        return skuInfo.getId();
     }
 
     @Override

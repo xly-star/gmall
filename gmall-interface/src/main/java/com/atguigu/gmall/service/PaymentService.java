@@ -6,7 +6,6 @@ import java.util.Map;
 
 /**
  * @author xulingyun
- * @create 2020-10-17 19:43
  */
 public interface PaymentService {
     /**

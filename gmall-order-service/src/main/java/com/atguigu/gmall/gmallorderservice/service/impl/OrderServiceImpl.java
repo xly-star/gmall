@@ -3,6 +3,7 @@ package com.atguigu.gmall.gmallorderservice.service.impl;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.atguigu.gmall.bean.OrderDetail;
 import com.atguigu.gmall.bean.OrderInfo;
 import com.atguigu.gmall.bean.PaymentInfo;
@@ -64,7 +65,7 @@ public class OrderServiceImpl implements OrderService {
 
         orderInfo.setCreateTime(new Date());
 
-        orderInfoMapper.insertSelective(orderInfo);
+        orderInfoMapper.insert(orderInfo);
         List<OrderDetail> orderDetailList = orderInfo.getOrderDetailList();
         for (OrderDetail orderDetail : orderDetailList) {
             orderDetail.setOrderId(orderInfo.getId());
@@ -245,6 +246,25 @@ public class OrderServiceImpl implements OrderService {
         updateOrderStatus(orderId, ProcessStatus.SPLIT);
 
         return subOrderInfoList;
+    }
+
+    @Override
+    public List<OrderInfo> getOrderListByUserId(String userId) {
+        Example example = new Example(OrderInfo.class);
+        example.createCriteria().andEqualTo("userId", userId);
+        example.orderBy("createTime").desc();
+        example.selectProperties("id","consignee","consigneeTel","totalAmount","orderStatus","processStatus",
+                "userId","paymentWay","expireTime","deliveryAddress","orderComment","createTime","parentOrderId","trackingNo","imgUrl","outTradeNo");
+        List<OrderInfo> select = orderInfoMapper.selectByExample(example);
+        System.out.println(JSONObject.toJSONString(select));
+        for (OrderInfo info : select) {
+            OrderDetail orderDetail = new OrderDetail();
+            orderDetail.setOrderId(info.getId());
+            List<OrderDetail> list = orderDetailMapper.select(orderDetail);
+            info.setOrderDetailList(list);
+        }
+        System.out.println(JSONObject.toJSONString(select));
+        return select;
     }
 
 

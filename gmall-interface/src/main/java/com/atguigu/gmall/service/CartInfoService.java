@@ -7,7 +7,6 @@ import java.util.List;
 
 /**
  * @author xulingyun
- * @create 2020-10-14 15:03
  */
 public interface CartInfoService {
     /**

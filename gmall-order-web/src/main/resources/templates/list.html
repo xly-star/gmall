@@ -18,14 +18,14 @@
   <div id="nav">
     <nav>
       <div class="logo">
-        <img src="./img/logo2018.gif" alt="">
+        <img src="./img/logo1.jpg" alt="">
       </div>
       <div class="myjd">
 
 
       </div>
       <ul class="nav_ul">
-        <li>首页</li>
+        <li><a href="http://www.gmall.com/index">首页</a></li>
 
 
       </ul>
@@ -102,27 +102,30 @@
           <table class="table" th:each="orderInfo:${orderList}">
             <tr>
               <td colspan="7" style="background:#F7F7F7"  class="order-header" >
-                <span style="color:#AAAAAA" text="2018-04-22 19:33:00"> </span>
-                <span><ruby style="color:#AAAAAA">订单号:</ruby><span  text=""></span>  </span>
-                <span>状态 </span>
+                <span style="color:#AAAAAA" th:text="${orderInfo.createTime}"> </span>
+                <span><ruby style="color:#AAAAAA">订单号:</ruby><span th:text="${orderInfo.id}"></span>  </span>
+                <span th:if="${orderInfo.orderStatus}">
+                <span>状态 <span th:text="${orderInfo.orderStatus.comment}"></span></span>
+                </span>
               </td>
             </tr>
 
             <!--不拆单情况------------------->
             <!--不拆单情况------------------->
             <!--不拆单情况------------------->
-            <tr >
+            <tr class="tr" th:each="orderDetailInfo:${orderInfo.orderDetailList}">
+
               <td colspan="3" class="item">
-                <img    src="img/ding.jpg" alt="" class="img">
+                <img th:src="${orderDetailInfo.imgUrl}"   src="img/ding.jpg" alt="" class="img">
                 <div>
-                  <p >商品名称11111111111111</p>
+                  <p th:text="${orderDetailInfo.skuName}">商品名称11111111111111</p>
                 </div>
-                <div style="margin-left:15px;"  >X 1</div>
+                <div style="margin-left:15px;"  >X <span th:text="${orderDetailInfo.skuNum}">1</span></div>
               </td>
 
-              <td    rowspan="2" ><span  >张晨</span> </td>
+              <td    rowspan="2" ><span th:text="${userInfo.loginName}" >张晨</span> </td>
               <td  rowspan="2">
-                <div style="margin-left:15px;"> 总额 9999</div>
+                <div style="margin-left:15px;"> 总额 <span th:text="${orderDetailInfo.orderPrice} * ${orderDetailInfo.skuNum}">9999</span></div>
                 <hr style="width:90%;">
                 <p   >在线支付</p>
               </td>
@@ -140,7 +143,7 @@
                           [北京市] 在北京昌平区南口公司进行签收扫描,快件已被拍照(您
                           的快件已签收,感谢您使用韵达快递)签收
                         </li>
- 
+
                       </ul>
                     </div>
                   </div>
@@ -156,16 +159,17 @@
             </tr>
 
 
-            <tr >
-              <td colspan="3" class="item">
-                <img    src="img/ding.jpg" alt="" class="img">
-                <div>
-                  <p >商品名称2222222222222222222</p>
-                </div>
-                <div style="margin-left:15px;"  >X 2</div>
-              </td>
- 
-            </tr>
+
+<!--            <tr >-->
+<!--              <td colspan="3" class="item">-->
+<!--                <img    src="img/ding.jpg" alt="" class="img">-->
+<!--                <div>-->
+<!--                  <p >商品名称2222222222222222222</p>-->
+<!--                </div>-->
+<!--                <div style="margin-left:15px;"  >X 2</div>-->
+<!--              </td>-->
+<!-- -->
+<!--            </tr>-->
 
 
             <!-- 拆单情况------------------->
@@ -248,170 +252,222 @@
 
 
 
-        <table class="table">
-          <tr>
-            <td colspan="7" style="background:#F7F7F7"  class="order-header" >
-              <span style="color:#AAAAAA">2017-12-09 20:50:10</span>
-              <span><ruby style="color:#AAAAAA">订单号:</ruby> 70207298274</span>
-              <span>已拆分<i class="table_i"></i></span>
-              <i class="table_i5 isShow"></i>
-            </td>
-          </tr>
-		  <tr >
-            <td colspan="7" style="background:#F7F7F7"  class="order-header" >
-              <span style="color:#AAAAAA">2017-12-09 20:50:10</span>
-              <span><ruby style="color:#AAAAAA">订单号:</ruby> 70207298274</span>
-              
-              <i class="table_i5 isShow"></i>
-            </td>
-          </tr>
-          <tr>
-            <td colspan="3" class="item">
-              <img src="img/ding.jpg" alt="" class="img">
-              <div>
-                <p>MUXIWEIERPU皮手套男冬季加绒保暖户外骑<br />
-                车开车触摸屏全指防寒全指手套 黑色 均码</p>
-                <div><i class="table_i4"></i>找搭配</div>
-              </div>
-              <div style="margin-left:15px;">x1</div>
-  
-            </td>
-            <td>张三 </td>
-            <td style="padding-left:10px;color:#AAAAB1;">
-              <p style="margin-bottom:5px;">总额 ￥26.00</p>
-            </td>
-            <td>
-              <ul>
-                <li style="color:#71B247;">等待收货</li>
-                <li style="margin:4px 0;" class="hide"><i class="table_i2"></i>跟踪<i class="table_i3"></i>
-                    <div class="hi">
-                      <div class="p-tit">
-                        普通快递   运单号:390085324974
-                      </div>
-                      <div class="hideList">
-                        <ul>
-                          <li>
-                            [北京市] 在北京昌平区南口公司进行签收扫描,快件已被拍照(您
-                            的快件已签收,感谢您使用韵达快递)签收
-                          </li>
-                          <li>
-                            [北京市] 在北京昌平区南口公司进行签收扫描,快件已被拍照(您
-                            的快件已签收,感谢您使用韵达快递)签收
-                          </li>
-                          <li>
-                            [北京昌平区南口公司] 在北京昌平区南口公司进行派件扫描
-                          </li>
-                          <li>
-                            [北京市] 在北京昌平区南口公司进行派件扫描;派送业务员:业务员;联系电话:17319268636
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                </li>
-                <li class="tdLi">订单详情</li>
-              </ul>
-            </td>
-            <td>
-              <button>确认收货</button>
-              <p style="margin:4px 0; ">取消订单</p>
-              <p>催单</p>
-            </td>
-          </tr>
-		  <tr>
-            <td colspan="7" style="background:#F7F7F7"   class="order-header">
-              <span style="color:#AAAAAA">2017-12-09 20:50:10</span>
-              <span><ruby style="color:#AAAAAA">订单号:</ruby> 70207298274</span>
-            </td>
-          </tr>
-          <tr class="tr">
-            <td colspan="3" class="item">
-              <img src="img/ding.jpg" alt="" class="img">
-              <div>
-                <p>MUXIWEIERPU皮手套男冬季加绒保暖户外骑<br />
-                车开车触摸屏全指防寒全指手套 123123123123123</p>
-                <div><i class="table_i4"></i>找搭配</div>
-              </div>
-              <div style="margin-left:15px;">x1</div>
-              <div style="clear:both"></div>
- 
-            </td>
-            <td rowspan="2" >张三 </td>
-            <td rowspan="2" style="padding-left:10px;color:#AAAAB1;">
-              <p style="margin-bottom:5px;">总额 ￥26.00</p>
-            </td>
-            <td rowspan="2" >
-              <ul>
-                <li style="color:#71B247;">等待收货</li>
-                <li style="margin:4px 0;" class="hide"><i class="table_i2"></i>跟踪<i class="table_i3"></i>
-                    <div class="hi">
-                      <div class="p-tit">
-                        普通快递   运单号:390085324974
-                      </div>
-                      <div class="hideList">
-                        <ul>
-                          <li>
-                            [北京市] 在北京昌平区南口公司进行签收扫描,快件已被拍照(您
-                            的快件已签收,感谢您使用韵达快递)签收
-                          </li>
-                          <li>
-                            [北京市] 在北京昌平区南口公司进行签收扫描,快件已被拍照(您
-                            的快件已签收,感谢您使用韵达快递)签收
-                          </li>
-                          <li>
-                            [北京昌平区南口公司] 在北京昌平区南口公司进行派件扫描
-                          </li>
-                          <li>
-                            [北京市] 在北京昌平区南口公司进行派件扫描;派送业务员:业务员;联系电话:17319268636
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                </li>
-                <li class="tdLi">订单详情</li>
-              </ul>
-            </td>
-            <td rowspan="2">
-              <button>确认收货</button>
-              <p style="margin:4px 0; ">取消订单</p>
-              <p>催单</p>
-            </td>
-		
+<!--        <table class="table">-->
+<!--          <tr>-->
+<!--            <td colspan="7" style="background:#F7F7F7"  class="order-header" >-->
+<!--              <span style="color:#AAAAAA">2017-12-09 20:50:10</span>-->
+<!--              <span><ruby style="color:#AAAAAA">订单号:</ruby> 70207298274</span>-->
+<!--              <span>已拆分<i class="table_i"></i></span>-->
+<!--              <i class="table_i5 isShow"></i>-->
+<!--            </td>-->
+<!--          </tr>-->
+<!--		  <tr >-->
+<!--            <td colspan="7" style="background:#F7F7F7"  class="order-header" >-->
+<!--              <span style="color:#AAAAAA">2017-12-09 20:50:10</span>-->
+<!--              <span><ruby style="color:#AAAAAA">订单号:</ruby> 70207298274</span>-->
 
-         </tr>
-		 <tr>
-		   <td colspan="3" class="item">
-              <img src="img/ding.jpg" alt="" class="img">
-              <div>
-                <p>MUXIWEIERPU皮手套男冬季加绒保暖户外骑<br />
-                车开车触摸屏全指防寒全指手套 999900000</p>
-                <div><i class="table_i4"></i>找搭配</div>
-              </div>
-              <div style="margin-left:15px;">x1</div>
-              <div style="clear:both"></div>
- 
-            </td>
-		 </tr>
-        </table>
+<!--              <i class="table_i5 isShow"></i>-->
+<!--            </td>-->
+<!--          </tr>-->
+<!--          <tr>-->
+<!--            <td colspan="3" class="item">-->
+<!--              <img src="img/ding.jpg" alt="" class="img">-->
+<!--              <div>-->
+<!--                <p>MUXIWEIERPU皮手套男冬季加绒保暖户外骑<br />-->
+<!--                车开车触摸屏全指防寒全指手套 黑色 均码</p>-->
+<!--                <div><i class="table_i4"></i>找搭配</div>-->
+<!--              </div>-->
+<!--              <div style="margin-left:15px;">x1</div>-->
 
- 
+<!--            </td>-->
+<!--            <td>张三 </td>-->
+<!--            <td style="padding-left:10px;color:#AAAAB1;">-->
+<!--              <p style="margin-bottom:5px;">总额 ￥26.00</p>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--              <ul>-->
+<!--                <li style="color:#71B247;">等待收货</li>-->
+<!--                <li style="margin:4px 0;" class="hide"><i class="table_i2"></i>跟踪<i class="table_i3"></i>-->
+<!--                    <div class="hi">-->
+<!--                      <div class="p-tit">-->
+<!--                        普通快递   运单号:390085324974-->
+<!--                      </div>-->
+<!--                      <div class="hideList">-->
+<!--                        <ul>-->
+<!--                          <li>-->
+<!--                            [北京市] 在北京昌平区南口公司进行签收扫描,快件已被拍照(您-->
+<!--                            的快件已签收,感谢您使用韵达快递)签收-->
+<!--                          </li>-->
+<!--                          <li>-->
+<!--                            [北京市] 在北京昌平区南口公司进行签收扫描,快件已被拍照(您-->
+<!--                            的快件已签收,感谢您使用韵达快递)签收-->
+<!--                          </li>-->
+<!--                          <li>-->
+<!--                            [北京昌平区南口公司] 在北京昌平区南口公司进行派件扫描-->
+<!--                          </li>-->
+<!--                          <li>-->
+<!--                            [北京市] 在北京昌平区南口公司进行派件扫描;派送业务员:业务员;联系电话:17319268636-->
+<!--                          </li>-->
+<!--                        </ul>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                </li>-->
+<!--                <li class="tdLi">订单详情</li>-->
+<!--              </ul>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--              <button>确认收货</button>-->
+<!--              <p style="margin:4px 0; ">取消订单</p>-->
+<!--              <p>催单</p>-->
+<!--            </td>-->
+<!--          </tr>-->
+<!--          <tr>-->
+<!--            <td colspan="3" class="item">-->
+<!--              <img src="img/ding.jpg" alt="" class="img">-->
+<!--              <div>-->
+<!--                <p>MUXIWEIERPU皮手套男冬季加绒保暖户外骑<br />-->
+<!--                  车开车触摸屏全指防寒全指手套 黑色 均码</p>-->
+<!--                <div><i class="table_i4"></i>找搭配</div>-->
+<!--              </div>-->
+<!--              <div style="margin-left:15px;">x1</div>-->
+
+<!--            </td>-->
+<!--            <td>张三 </td>-->
+<!--            <td style="padding-left:10px;color:#AAAAB1;">-->
+<!--              <p style="margin-bottom:5px;">总额 ￥26.00</p>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--              <ul>-->
+<!--                <li style="color:#71B247;">等待收货</li>-->
+<!--                <li style="margin:4px 0;" class="hide"><i class="table_i2"></i>跟踪<i class="table_i3"></i>-->
+<!--                  <div class="hi">-->
+<!--                    <div class="p-tit">-->
+<!--                      普通快递   运单号:390085324974-->
+<!--                    </div>-->
+<!--                    <div class="hideList">-->
+<!--                      <ul>-->
+<!--                        <li>-->
+<!--                          [北京市] 在北京昌平区南口公司进行签收扫描,快件已被拍照(您-->
+<!--                          的快件已签收,感谢您使用韵达快递)签收-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                          [北京市] 在北京昌平区南口公司进行签收扫描,快件已被拍照(您-->
+<!--                          的快件已签收,感谢您使用韵达快递)签收-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                          [北京昌平区南口公司] 在北京昌平区南口公司进行派件扫描-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                          [北京市] 在北京昌平区南口公司进行派件扫描;派送业务员:业务员;联系电话:17319268636-->
+<!--                        </li>-->
+<!--                      </ul>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </li>-->
+<!--                <li class="tdLi">订单详情</li>-->
+<!--              </ul>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--              <button>确认收货</button>-->
+<!--              <p style="margin:4px 0; ">取消订单</p>-->
+<!--              <p>催单</p>-->
+<!--            </td>-->
+<!--          </tr>-->
+<!--		  <tr>-->
+<!--            <td colspan="7" style="background:#F7F7F7"   class="order-header">-->
+<!--              <span style="color:#AAAAAA">2017-12-09 20:50:10</span>-->
+<!--              <span><ruby style="color:#AAAAAA">订单号:</ruby> 70207298274</span>-->
+<!--            </td>-->
+<!--          </tr>-->
+<!--          <tr class="tr">-->
+<!--            <td colspan="3" class="item">-->
+<!--              <img src="img/ding.jpg" alt="" class="img">-->
+<!--              <div>-->
+<!--                <p>MUXIWEIERPU皮手套男冬季加绒保暖户外骑<br />-->
+<!--                车开车触摸屏全指防寒全指手套 123123123123123</p>-->
+<!--                <div><i class="table_i4"></i>找搭配</div>-->
+<!--              </div>-->
+<!--              <div style="margin-left:15px;">x1</div>-->
+<!--              <div style="clear:both"></div>-->
+
+<!--            </td>-->
+<!--            <td rowspan="2" >张三 </td>-->
+<!--            <td rowspan="2" style="padding-left:10px;color:#AAAAB1;">-->
+<!--              <p style="margin-bottom:5px;">总额 ￥26.00</p>-->
+<!--            </td>-->
+<!--            <td rowspan="2" >-->
+<!--              <ul>-->
+<!--                <li style="color:#71B247;">等待收货</li>-->
+<!--                <li style="margin:4px 0;" class="hide"><i class="table_i2"></i>跟踪<i class="table_i3"></i>-->
+<!--                    <div class="hi">-->
+<!--                      <div class="p-tit">-->
+<!--                        普通快递   运单号:390085324974-->
+<!--                      </div>-->
+<!--                      <div class="hideList">-->
+<!--                        <ul>-->
+<!--                          <li>-->
+<!--                            [北京市] 在北京昌平区南口公司进行签收扫描,快件已被拍照(您-->
+<!--                            的快件已签收,感谢您使用韵达快递)签收-->
+<!--                          </li>-->
+<!--                          <li>-->
+<!--                            [北京市] 在北京昌平区南口公司进行签收扫描,快件已被拍照(您-->
+<!--                            的快件已签收,感谢您使用韵达快递)签收-->
+<!--                          </li>-->
+<!--                          <li>-->
+<!--                            [北京昌平区南口公司] 在北京昌平区南口公司进行派件扫描-->
+<!--                          </li>-->
+<!--                          <li>-->
+<!--                            [北京市] 在北京昌平区南口公司进行派件扫描;派送业务员:业务员;联系电话:17319268636-->
+<!--                          </li>-->
+<!--                        </ul>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                </li>-->
+<!--                <li class="tdLi">订单详情</li>-->
+<!--              </ul>-->
+<!--            </td>-->
+<!--            <td rowspan="2">-->
+<!--              <button>确认收货</button>-->
+<!--              <p style="margin:4px 0; ">取消订单</p>-->
+<!--              <p>催单</p>-->
+<!--            </td>-->
 
 
- 
+<!--         </tr>-->
+<!--		 <tr>-->
+<!--		   <td colspan="3" class="item">-->
+<!--              <img src="img/ding.jpg" alt="" class="img">-->
+<!--              <div>-->
+<!--                <p>MUXIWEIERPU皮手套男冬季加绒保暖户外骑<br />-->
+<!--                车开车触摸屏全指防寒全指手套 999900000</p>-->
+<!--                <div><i class="table_i4"></i>找搭配</div>-->
+<!--              </div>-->
+<!--              <div style="margin-left:15px;">x1</div>-->
+<!--              <div style="clear:both"></div>-->
 
- 
+<!--            </td>-->
+<!--		 </tr>-->
+<!--        </table>-->
+
+<!-- -->
 
 
- 
+<!-- -->
 
-        <div class="order_btm">
-          <div>
-            <button>上一页</button>
-            <span>1</span>
-            <button>下一页</button>
-          </div>
-        </div>
-        <div style="clear:both;"></div>
-      </div>
+<!-- -->
+
+
+<!-- -->
+
+<!--        <div class="order_btm">-->
+<!--          <div>-->
+<!--            <button>上一页</button>-->
+<!--            <span>1</span>-->
+<!--            <button>下一页</button>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div style="clear:both;"></div>-->
+<!--      </div>-->
 
 
 

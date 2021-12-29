@@ -20,13 +20,13 @@ import java.util.Map;
 
 /**
  * @author xulingyun
- * @create 2020-10-11 9:17
  */
 @Component
 public class AuthInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String token = request.getParameter("newToken");
+        System.out.println("token ==" + token);
         if (token != null) {
             CookieUtil.setCookie(request, response, "token", token, WebConst.COOKIE_MAXAGE, false);
         }
@@ -40,7 +40,13 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
             String nickName = (String) map.get("nickName");
             request.setAttribute("nickName", nickName);
         }
+        String uri = request.getRequestURI();
+        System.out.println("*****"+uri);
+        //因为上传图片的处理器不是HandlerMethod
+        if ("/fileUpload".equals(uri)||"/saveSpuInfo".equals(uri)||"/saveSkuInfo".equals(uri)||"/addToCart".equals(uri)||"/statistics/eCharts".equals(uri)) {
 
+            return true;
+        }
         HandlerMethod handlerMethod = (HandlerMethod) handler;
         LoginRequire annotation = handlerMethod.getMethodAnnotation(LoginRequire.class);
         if (annotation != null) {
